@@ -19,7 +19,7 @@ def play():
   efforts +=1 
   bulls = 0 
   cows=0
-  print(numbers)
+#  print(numbers)
   inputNum = input("enter 4 digit numbers")
   gus=[]
 
