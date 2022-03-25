@@ -20,7 +20,7 @@ def play():
   bulls = 0 
   cows=0
 #  print(numbers)
-  inputNum = input("enter 4 digit numbers")
+  inputNum = input("guess 4 numbers -> ")
   gus=[]
 
 # input 4 digit number to gus and check if the numbers bulls or not   
