@@ -1,54 +1,44 @@
-import os
 import random
-import string
+import collections
+import termcolor
+import pyfiglet
 
-print("-----------------------------------------")
-print("\t\tMenu")
-print("-----------------------------------------")
-print("Enter code using characters.")
-print("You should constant of 4 characters from A to F ")
-print("EXAMPLE : ABCD")
-print("If you don't know how to play the game, read the file README")
-print("-----------------------------------------")
-result_str = []
-attempts= 0 
-def get_random_string():
-    letters = string.ascii_uppercase
-    for i in range(4):
-        rand_str= ''.join(random.choice('ABCDEF'))
-        result_str.append(rand_str)
-    
-    return result_str
+length = 4
+random_string = [random.choice("ABCDEF") for rand_str in range(length)]
+# print(*random_string)
+count = collections.Counter(random_string)
 
+def rule():
+    print(termcolor.colored(pyfiglet.figlet_format("MASTERMIND"), color="red"))
+    print("-----------------------------------------")
+    print("\t\tMenu")
+    print("-----------------------------------------")
+    print("Enter code using characters.")
+    print("you should constant of 4 characters from A to F ")
+    print("EXAMPLE : ABCD")
+    print("If you don't know how to play the game, read the file README\n")
+    print("You have 8 attempts")
 
 def create_game():
-    global attempts 
-    attempts +=1
-    right_position = 0 
-    wrong_position = 0 
-    # print(result_str)    
-    input_str = input("Your guess : ")
-    guess = []
-    for count_str in range(4):
-        guess.append(input_str[count_str].upper())  
-    
-    for guess_str_w in range(4):
-        for check in range(4):
-            if guess[guess_str_w] == result_str[check]:
-                wrong_position +=1  
-    for guess_str in range(4):    
-        if guess[guess_str] == result_str[guess_str]: 
-            right_position +=1                    
-    print("Right Position is : ", right_position)    
-    print("wrong Position is : ", wrong_position)    
+    guess = input('Your guess ?: ').upper() 
+    guess_count = collections.Counter(guess)
+    wrong_position = sum(min(count[key], guess_count[key]) for key in count)
+    right_position = sum(a==b for a,b in zip(random_string, guess))
+    wrong_position -= right_position
+    print(f'Right Position is : {right_position} Wrong Position is : {wrong_position}')
+    return right_position != length
 
-    if right_position == 4 :
-        print("congratulations you win after ".upper(),attempts)
-        
-    else : 
-        create_game()   
+def result():
+    for attempts in range(8):
+        if not create_game(): 
+            print('You Win !')
+            break
+        else:
+            print('Your remaining attempts is :', 8 - 1- attempts)
+    else:
+        print('You Lost . The secret was {}.'.format(''.join(random_string)))
 
-
-
-get_random_string()
+rule()
+print("-----------------------------------------")
 create_game()
+result()
