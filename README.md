@@ -6,8 +6,9 @@
 
 # Rules : 
  - You must enter four letters from A to F 
+ - You have 8 attempts
  - If you guess the letters and they are in the correct position, it will show you how many letters you guessed (Right Position)
- - If you guess the letters and they are not in the correct place, the number of guesses will appear (Wrong Position)
+ - If you guess the letters and they are not in the correct place, the number of guesses will appear (Wrong Position) 
  - If you get 4 letters in the correct place you will win and it will show you the number of attempts you made
 
                                                                       Enjoy.
